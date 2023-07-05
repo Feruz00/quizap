@@ -10,6 +10,7 @@ import Progress from './Progress'
 import FinishScreen from './FinishScreen'
 import Footer from './Footer'
 import Timer from './Timer'
+import q from '../data/questions.json'
 
 const initialState = {
     questions: [],
@@ -90,14 +91,15 @@ const App = () => {
     }, 0 )
 
     useEffect( ()=>{
-        fetch('http://localhost:9000/questions')
-            .then(res=>res.json())
-            .then(data=>{
-                dispatch({type: 'dataReceived', payload:data})
-            })
-            .catch(err=>{
-                dispatch({type: 'dataFailed'})
-            }) 
+        dispatch( {type: 'dataReceived', payload: q.questions } )
+        // fetch('http://localhost:9000/questions')
+        //     .then(res=>res.json())
+        //     .then(data=>{
+        //         dispatch({type: 'dataReceived', payload:data})
+        //     })
+        //     .catch(err=>{
+        //         dispatch({type: 'dataFailed'})
+        //     }) 
     } , [])
   return (
     <div className='app'>
